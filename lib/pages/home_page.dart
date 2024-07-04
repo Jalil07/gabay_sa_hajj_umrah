@@ -149,7 +149,9 @@ class _TitlesPageState extends State<TitlesPage> {
                             contents[index]['title'],
                             style: TextStyle(
                                 fontSize: fontSizeProvider.fontSize,
-                                fontFamily: 'Poppins'),
+                                fontFamily: 'Poppins',
+                            fontWeight: FontWeight.bold,
+                            ),
                           );
                         },
                       ),
