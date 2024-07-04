@@ -164,6 +164,14 @@ class _TitlesPageState extends State<TitlesPage> {
                           ),
                         );
                       },
+                      leading: Container(
+                        width: 10,
+                        height: 10,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color(0xff70394B)
+                        ),
+                      ),
                     ),
                     if (index < contents.length - 1) const Divider(),
                   ],
