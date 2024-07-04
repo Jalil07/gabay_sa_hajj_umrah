@@ -2,8 +2,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' as rootBundle;
 import 'package:provider/provider.dart';
+import '../models/home_page_drawer.dart';
 import '../providers/font_size_provider.dart';
 import 'content_page.dart';
+
+final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
 class TitlesPage extends StatefulWidget {
   const TitlesPage({super.key});
@@ -32,7 +35,9 @@ class _TitlesPageState extends State<TitlesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Colors.white,
+      drawer: const HomeDrawer(),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -41,6 +46,12 @@ class _TitlesPageState extends State<TitlesPage> {
             expandedHeight: 400.0,
             floating: false,
             pinned: true,
+            leading: IconButton(
+              icon: const Icon(Icons.menu, color: Color(0xff70394B)),
+              onPressed: () {
+                _scaffoldKey.currentState?.openDrawer();
+              },
+            ),
             flexibleSpace: FlexibleSpaceBar(
               titlePadding: const EdgeInsets.all(16),
               centerTitle: true,
