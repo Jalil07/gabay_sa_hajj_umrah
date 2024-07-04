@@ -99,7 +99,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: const Color(0xfff2efde),
+      backgroundColor: Colors.white,
       child: SafeArea(
         child: Column(
           children: [
@@ -112,9 +112,13 @@ class _HomeDrawerState extends State<HomeDrawer> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Image.asset(
-                        'assets/images/logo.png',
-                        height: 95,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(20.0),
+                        // Adjust the curve radius here
+                        child: Image.asset(
+                          'assets/images/logo.png',
+                          height: 95,
+                        ),
                       ),
                       const SizedBox(height: 15),
                       const Text(

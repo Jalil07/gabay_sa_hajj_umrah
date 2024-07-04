@@ -70,6 +70,7 @@ class _TitlesPageState extends State<TitlesPage> {
                           'Gabay sa Hajj at Umrah',
                           style: TextStyle(
                             color: const Color(0xff70394B),
+                            fontFamily: 'Poppins',
                             fontSize: top > 100 ? 14 : 18,
                             fontWeight: FontWeight.bold,
                           ),
@@ -96,7 +97,7 @@ class _TitlesPageState extends State<TitlesPage> {
                         builder: (context, fontSizeProvider, child) {
                           return Text(
                             contents[index]['title'],
-                            style: TextStyle(fontSize: fontSizeProvider.fontSize),
+                            style: TextStyle(fontSize: fontSizeProvider.fontSize, fontFamily: 'Poppins'),
                           );
                         },
                       ),

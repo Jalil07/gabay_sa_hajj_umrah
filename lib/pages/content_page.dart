@@ -7,7 +7,7 @@ class ContentPage extends StatefulWidget {
   final String title;
   final String content;
 
-  ContentPage({required this.title, required this.content});
+  const ContentPage({super.key, required this.title, required this.content});
 
   @override
   State<ContentPage> createState() => _ContentPageState();
@@ -27,7 +27,7 @@ class _ContentPageState extends State<ContentPage> {
                 children: [
                   const Text('Adjust Font Size'),
                   SliderTheme(
-                    data: SliderThemeData(
+                    data: const SliderThemeData(
                       trackShape: RoundedRectSliderTrackShape(),
                     ),
                     child: Slider(
@@ -87,6 +87,7 @@ class _ContentPageState extends State<ContentPage> {
                     style: TextStyle(
                       fontSize: fontSizeProvider.fontSize,
                       fontWeight: FontWeight.bold,
+                        fontFamily: 'Poppins',
                     ),
                   );
                 },
@@ -96,7 +97,7 @@ class _ContentPageState extends State<ContentPage> {
                 builder: (context, fontSizeProvider, child) {
                   return SelectableText(
                     widget.content,
-                    style: TextStyle(fontSize: fontSizeProvider.fontSize),
+                    style: TextStyle(fontSize: fontSizeProvider.fontSize, fontFamily: 'Poppins',),
                   );
                 },
               ),

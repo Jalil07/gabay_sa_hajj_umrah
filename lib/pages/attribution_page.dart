@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AttributionPage extends StatefulWidget {
-  const AttributionPage({Key? key}) : super(key: key);
+  const AttributionPage({super.key});
 
   @override
   State<AttributionPage> createState() => _AttributionPageState();
@@ -17,19 +17,15 @@ class _AttributionPageState extends State<AttributionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xfff2efde),
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
-        backgroundColor: const Color(0xfff2efde),
-        iconTheme: const IconThemeData(
-          color: Color(0xff91a57d),
-        ),
+        backgroundColor: Colors.white,
+        iconTheme: const IconThemeData(color: Color(0xff70394B)),
         title: const Text(
           'Attribution',
-          style: TextStyle(
-            color: Color(0xff91a57d),
-          ),
+          style: TextStyle(color: Color(0xff70394B)),
         ),
       ),
       body: SafeArea(
@@ -57,139 +53,81 @@ class _AttributionPageState extends State<AttributionPage> {
                         end: Alignment.bottomRight,
                         stops: [0, .6, 1],
                         colors: [
-                          Color(0xff606c38),
-                          Color(0xff91a57d),
-                          Color(0xff606c38),
-                          // Theme.of(context).primaryColorDark,
+                          Color(0xff70394B),
+                          Color(0xffa2667a),
+                          Color(0xff70394B),
                         ],
                       ),
                     ),
-                    child: Column(
+                    child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 15, top: 20, bottom: 6),
-                          child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Image.asset(
-                                'assets/images/dialoguetime.png',
-                                height: 75,
-                              )),
+                        Image.asset(
+                          'assets/images/dialoguetime.png',
+                          height: 75,
                         ),
-                        Row(
-                          children: [
-                            Container(
-                              width: 10,
-                              height: 10,
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            const Text(
-                              'جمعية وقت الحوار للدعوة  الإلكترونية',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 21, fontFamily: 'uthmanic2'),
-                            ),
-                          ],
+                        const Spacer(),
+                        const Text(
+                          'جمعية وقت الحوار\nللدعوة الإلكترونية',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 21,
+                              fontFamily: 'Uthmanic'),
                         ),
                       ],
                     )),
                 Container(
-                    margin: const EdgeInsets.all(12),
-                    padding: const EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      gradient: const LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        stops: [0, .6, 1],
-                        colors: [
-                          Color(0xff606c38),
-                          Color(0xff91a57d),
-                          Color(0xff606c38),
-                          // Theme.of(context).primaryColorDark,
+                  margin: const EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    gradient: const LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      stops: [0, .6, 1],
+                      colors: [
+                        Color(0xff70394B),
+                        Color(0xffa2667a),
+                        Color(0xff70394B),
+                      ],
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            width: 10,
+                            height: 10,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          const Text(
+                            'Supports',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Poppins'),
+                          ),
                         ],
                       ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              width: 10,
-                              height: 10,
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            const Text(
-                              'Supports',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
+                      const Padding(
+                        padding: EdgeInsets.only(left: 23, top: 6),
+                        child: Text(
+                          'All the People who supports the app',
+                          style: TextStyle(
+                              color: Colors.white, fontFamily: 'Poppins'),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.only(left: 23, top: 6),
-                          child: Text(
-                            'All the People who supports the app',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ],
-                    )),
-                // Container(
-                //   margin: const EdgeInsets.all(12),
-                //   padding: const EdgeInsets.all(15),
-                //   decoration: BoxDecoration(
-                //     borderRadius: BorderRadius.circular(10),
-                //     gradient: const LinearGradient(
-                //       begin: Alignment.topLeft,
-                //       end: Alignment.bottomRight,
-                //       stops: [0, .6, 1],
-                //       colors: [
-                //         Color(0xff606c38),
-                //         Color(0xff91a57d),
-                //         Color(0xff606c38),
-                //         // Theme.of(context).primaryColorDark,
-                //       ],
-                //     ),
-                //   ),
-                //   child: Column(
-                //     crossAxisAlignment: CrossAxisAlignment.start,
-                //     children: [
-                //       Row(
-                //         children: [
-                //           Container(
-                //             width: 10,
-                //             height: 10,
-                //             decoration: const BoxDecoration(
-                //               shape: BoxShape.circle,
-                //               color: Colors.white,
-                //             ),
-                //           ),
-                //           const SizedBox(width: 15,),
-                //           const Text('App Design inspired by', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-                //         ],
-                //       ),
-                //       const Padding(
-                //         padding: EdgeInsets.only(left: 23, top: 6),
-                //         child: Text('Hawazen S. Al Rifai', style: TextStyle(color: Colors.white),),
-                //       ),
-                //     ],
-                //   )
-                // ),
+                      ),
+                    ],
+                  ),
+                ),
                 const SizedBox(height: 55),
               ],
             ),
