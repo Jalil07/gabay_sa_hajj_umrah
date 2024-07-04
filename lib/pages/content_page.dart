@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import '../providers/font_size_provider.dart';
 
 class ContentPage extends StatefulWidget {
   final String title;
@@ -12,6 +14,42 @@ class ContentPage extends StatefulWidget {
 }
 
 class _ContentPageState extends State<ContentPage> {
+  void showBottomSheetSlider(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Consumer<FontSizeProvider>(
+          builder: (context, fontSizeProvider, child) {
+            return Container(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text('Adjust Font Size'),
+                  SliderTheme(
+                    data: SliderThemeData(
+                      trackShape: RoundedRectSliderTrackShape(),
+                    ),
+                    child: Slider(
+                      activeColor: const Color(0xFF85C223),
+                      inactiveColor: Colors.grey,
+                      value: fontSizeProvider.fontSize,
+                      min: 10.0,
+                      max: 50.0,
+                      onChanged: (newFontSize) {
+                        fontSizeProvider.updateTranslationFontSize(newFontSize);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,10 +59,17 @@ class _ContentPageState extends State<ContentPage> {
             icon: const Icon(Icons.copy),
             onPressed: () {
               Clipboard.setData(
-                  ClipboardData(text: '${widget.title}\n\n${widget.content}'));
+                ClipboardData(text: '${widget.title}\n\n${widget.content}'),
+              );
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Copied to clipboard')),
               );
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.format_size),
+            onPressed: () {
+              showBottomSheetSlider(context);
             },
           ),
         ],
@@ -35,16 +80,26 @@ class _ContentPageState extends State<ContentPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                widget.title,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
+              Consumer<FontSizeProvider>(
+                builder: (context, fontSizeProvider, child) {
+                  return Text(
+                    widget.title,
+                    style: TextStyle(
+                      fontSize: fontSizeProvider.fontSize,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: 15),
-              SelectableText(widget.content,
-                  style: const TextStyle(fontSize: 16)),
+              Consumer<FontSizeProvider>(
+                builder: (context, fontSizeProvider, child) {
+                  return SelectableText(
+                    widget.content,
+                    style: TextStyle(fontSize: fontSizeProvider.fontSize),
+                  );
+                },
+              ),
             ],
           ),
         ),

@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
+import '../providers/font_size_provider.dart';
+import 'package:provider/provider.dart';
 import 'pages/home_page.dart';
 
 void main() {
-  runApp(const HajjTutorialApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => FontSizeProvider(),
+      child: HajjTutorialApp(),
+    ),
+  );
 }
 
 class HajjTutorialApp extends StatelessWidget {
-  const HajjTutorialApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Gabay sa Hajj at Umrah',
+      title: 'Hajj Tutorial',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: TitlesPage(),
+      home: const TitlesPage(),
     );
   }
 }

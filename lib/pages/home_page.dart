@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' as rootBundle;
+import 'package:provider/provider.dart';
+import '../providers/font_size_provider.dart';
 import 'content_page.dart';
 
 class TitlesPage extends StatefulWidget {
@@ -42,12 +44,16 @@ class _TitlesPageState extends State<TitlesPage> {
                   double top = constraints.biggest.height;
                   return Padding(
                     padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
-                    child: Text(
-                      'Gabay sa Hajj at Umrah',
-                      style: TextStyle(
-                        color: const Color(0xff70394B),
-                        fontSize: top > 100 ? 14 : 18, // Adjust the font size based on the expanded height
-                      ),
+                    child: Consumer<FontSizeProvider>(
+                      builder: (context, fontSizeProvider, child) {
+                        return Text(
+                          'Gabay sa Hajj at Umrah',
+                          style: TextStyle(
+                            color: const Color(0xff70394B),
+                            fontSize: top > 100 ? 14 : 18, // Adjust the font size based on the expanded height
+                          ),
+                        );
+                      },
                     ),
                   );
                 },
@@ -64,7 +70,14 @@ class _TitlesPageState extends State<TitlesPage> {
                 return Column(
                   children: [
                     ListTile(
-                      title: Text(contents[index]['title']),
+                      title: Consumer<FontSizeProvider>(
+                        builder: (context, fontSizeProvider, child) {
+                          return Text(
+                            contents[index]['title'],
+                            style: TextStyle(fontSize: fontSizeProvider.fontSize),
+                          );
+                        },
+                      ),
                       onTap: () {
                         Navigator.push(
                           context,
