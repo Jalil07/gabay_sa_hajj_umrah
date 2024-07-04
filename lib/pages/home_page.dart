@@ -39,28 +39,28 @@ class _TitlesPageState extends State<TitlesPage> {
             floating: false,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
+              background: Image.asset(
+                'assets/images/logo.png',
+                fit: BoxFit.cover,
+              ),
               title: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
                   double top = constraints.biggest.height;
                   return Padding(
-                    padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
+                    padding: const EdgeInsets.only(left: 24, bottom: 9.0),
                     child: Consumer<FontSizeProvider>(
                       builder: (context, fontSizeProvider, child) {
                         return Text(
                           'Gabay sa Hajj at Umrah',
                           style: TextStyle(
                             color: const Color(0xff70394B),
-                            fontSize: top > 100 ? 14 : 18, // Adjust the font size based on the expanded height
+                            fontSize: top > 100 ? 14 : 18,
                           ),
                         );
                       },
                     ),
                   );
                 },
-              ),
-              background: Image.asset(
-                'assets/images/logo.png',
-                fit: BoxFit.cover,
               ),
             ),
           ),
