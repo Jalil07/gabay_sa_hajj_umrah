@@ -14,6 +14,7 @@ class ContentPage extends StatefulWidget {
 }
 
 class _ContentPageState extends State<ContentPage> {
+
   void showBottomSheetSlider(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -31,7 +32,7 @@ class _ContentPageState extends State<ContentPage> {
                       trackShape: RoundedRectSliderTrackShape(),
                     ),
                     child: Slider(
-                      activeColor: const Color(0xFF85C223),
+                      activeColor: const Color(0xff70394B),
                       inactiveColor: Colors.grey,
                       value: fontSizeProvider.fontSize,
                       min: 10.0,
@@ -53,11 +54,23 @@ class _ContentPageState extends State<ContentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         actions: [
-          IconButton(
-            icon: const Icon(Icons.copy),
-            onPressed: () {
+          GestureDetector(
+            onTap: () {
+              showBottomSheetSlider(context);
+            },
+            child: Image.asset(
+              'assets/images/copy.png',
+              height: 24,
+              width: 24,
+            ),
+          ),
+          const SizedBox(width: 20),
+          GestureDetector(
+            onTap: () {
               Clipboard.setData(
                 ClipboardData(text: '${widget.title}\n\n${widget.content}'),
               );
@@ -65,13 +78,13 @@ class _ContentPageState extends State<ContentPage> {
                 const SnackBar(content: Text('Copied to clipboard')),
               );
             },
+            child: Image.asset(
+              'assets/images/text.png',
+              height: 21,
+              width: 21,
+            ),
           ),
-          IconButton(
-            icon: const Icon(Icons.format_size),
-            onPressed: () {
-              showBottomSheetSlider(context);
-            },
-          ),
+          const SizedBox(width: 15),
         ],
       ),
       body: Padding(

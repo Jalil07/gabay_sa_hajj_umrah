@@ -25,11 +25,48 @@ class _TitlesPageState extends State<TitlesPage> {
   }
 
   Future<void> loadJsonData() async {
-    final jsonString = await rootBundle.rootBundle.loadString('assets/data.json');
+    final jsonString =
+        await rootBundle.rootBundle.loadString('assets/data.json');
     final jsonResponse = json.decode(jsonString);
     setState(() {
-      contents = jsonResponse['hajj_tutorial'];
+      contents = jsonResponse['hajj_data'];
     });
+  }
+
+  void showBottomSheetSlider(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Consumer<FontSizeProvider>(
+          builder: (context, fontSizeProvider, child) {
+            return Container(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text('Adjust Font Size'),
+                  SliderTheme(
+                    data: const SliderThemeData(
+                      trackShape: RoundedRectSliderTrackShape(),
+                    ),
+                    child: Slider(
+                      activeColor: const Color(0xff70394B),
+                      inactiveColor: Colors.grey,
+                      value: fontSizeProvider.fontSize,
+                      min: 10.0,
+                      max: 50.0,
+                      onChanged: (newFontSize) {
+                        fontSizeProvider.updateTranslationFontSize(newFontSize);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 
   @override
@@ -47,24 +84,39 @@ class _TitlesPageState extends State<TitlesPage> {
             floating: false,
             pinned: true,
             leading: IconButton(
-              icon: const Icon(Icons.menu, color: Color(0xff70394B)),
+              icon: const Icon(
+                Icons.menu,
+                color: Color(0xff70394B),
+              ),
               onPressed: () {
                 _scaffoldKey.currentState?.openDrawer();
               },
             ),
-            flexibleSpace: FlexibleSpaceBar(
-              titlePadding: const EdgeInsets.all(16),
-              centerTitle: true,
-              background: Image.asset(
-                'assets/images/logo.png',
-                fit: BoxFit.cover,
+            actions: [
+              GestureDetector(
+                onTap: () {
+                  showBottomSheetSlider(context);
+                },
+                child: Image.asset(
+                  'assets/images/text.png',
+                  height: 22,
+                  width: 22,
+                  color: const Color(0xff70394B),
+                ),
               ),
-              title: LayoutBuilder(
-                builder: (BuildContext context, BoxConstraints constraints) {
-                  double top = constraints.biggest.height;
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 9.0),
-                    child: Consumer<FontSizeProvider>(
+              const SizedBox(width: 15),
+            ],
+            flexibleSpace: FlexibleSpaceBar(
+                titlePadding: const EdgeInsets.all(16),
+                centerTitle: true,
+                background: Image.asset(
+                  'assets/images/logo.png',
+                  fit: BoxFit.cover,
+                ),
+                title: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                    double top = constraints.biggest.height;
+                    return Consumer<FontSizeProvider>(
                       builder: (context, fontSizeProvider, child) {
                         return Text(
                           'Gabay sa Hajj at Umrah',
@@ -76,20 +128,18 @@ class _TitlesPageState extends State<TitlesPage> {
                           ),
                         );
                       },
-                    ),
-                  );
-                },
-              ),
-              stretchModes: const <StretchMode>[
-              StretchMode. zoomBackground,
-              StretchMode. blurBackground,
-              StretchMode.fadeTitle,
-              ]
-            ),
+                    );
+                  },
+                ),
+                stretchModes: const <StretchMode>[
+                  StretchMode.zoomBackground,
+                  StretchMode.blurBackground,
+                  StretchMode.fadeTitle,
+                ]),
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
-                  (context, index) {
+              (context, index) {
                 return Column(
                   children: [
                     ListTile(
@@ -97,7 +147,9 @@ class _TitlesPageState extends State<TitlesPage> {
                         builder: (context, fontSizeProvider, child) {
                           return Text(
                             contents[index]['title'],
-                            style: TextStyle(fontSize: fontSizeProvider.fontSize, fontFamily: 'Poppins'),
+                            style: TextStyle(
+                                fontSize: fontSizeProvider.fontSize,
+                                fontFamily: 'Poppins'),
                           );
                         },
                       ),
