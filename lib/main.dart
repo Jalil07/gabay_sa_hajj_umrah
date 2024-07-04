@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'pages/home_page.dart';
 
 void main() {
-  runApp(HajjTutorialApp());
+  runApp(const HajjTutorialApp());
 }
 
 class HajjTutorialApp extends StatelessWidget {
+  const HajjTutorialApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Hajj Tutorial',
+      debugShowCheckedModeBanner: false,
+      title: 'Gabay sa Hajj at Umrah',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

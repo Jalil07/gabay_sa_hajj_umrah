@@ -16,23 +16,37 @@ class _ContentPageState extends State<ContentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
         actions: [
           IconButton(
-            icon: Icon(Icons.copy),
+            icon: const Icon(Icons.copy),
             onPressed: () {
-              Clipboard.setData(ClipboardData(text: '${widget.title}\n\n${widget.content}'));
+              Clipboard.setData(
+                  ClipboardData(text: '${widget.title}\n\n${widget.content}'));
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Copied to clipboard')),
+                const SnackBar(content: Text('Copied to clipboard')),
               );
             },
           ),
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
-          child: SelectableText(widget.content, style: TextStyle(fontSize: 16)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                widget.title,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 15),
+              SelectableText(widget.content,
+                  style: const TextStyle(fontSize: 16)),
+            ],
+          ),
         ),
       ),
     );
