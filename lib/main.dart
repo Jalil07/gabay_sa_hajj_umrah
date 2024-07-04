@@ -7,12 +7,14 @@ void main() {
   runApp(
     ChangeNotifierProvider(
       create: (context) => FontSizeProvider(),
-      child: HajjTutorialApp(),
+      child: const HajjTutorialApp(),
     ),
   );
 }
 
 class HajjTutorialApp extends StatelessWidget {
+  const HajjTutorialApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
