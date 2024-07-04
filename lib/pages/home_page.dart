@@ -32,13 +32,18 @@ class _TitlesPageState extends State<TitlesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            backgroundColor: Colors.white,
+            surfaceTintColor: Colors.white,
             expandedHeight: 400.0,
             floating: false,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
+              titlePadding: const EdgeInsets.all(16),
+              centerTitle: true,
               background: Image.asset(
                 'assets/images/logo.png',
                 fit: BoxFit.cover,
@@ -47,7 +52,7 @@ class _TitlesPageState extends State<TitlesPage> {
                 builder: (BuildContext context, BoxConstraints constraints) {
                   double top = constraints.biggest.height;
                   return Padding(
-                    padding: const EdgeInsets.only(left: 24, bottom: 9.0),
+                    padding: const EdgeInsets.only(bottom: 9.0),
                     child: Consumer<FontSizeProvider>(
                       builder: (context, fontSizeProvider, child) {
                         return Text(
@@ -55,6 +60,7 @@ class _TitlesPageState extends State<TitlesPage> {
                           style: TextStyle(
                             color: const Color(0xff70394B),
                             fontSize: top > 100 ? 14 : 18,
+                            fontWeight: FontWeight.bold,
                           ),
                         );
                       },
@@ -62,6 +68,11 @@ class _TitlesPageState extends State<TitlesPage> {
                   );
                 },
               ),
+              stretchModes: const <StretchMode>[
+              StretchMode. zoomBackground,
+              StretchMode. blurBackground,
+              StretchMode.fadeTitle,
+              ]
             ),
           ),
           SliverList(
