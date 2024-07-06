@@ -90,31 +90,32 @@ class _ContentPageState extends State<ContentPage> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Consumer<FontSizeProvider>(
-                builder: (context, fontSizeProvider, child) {
-                  return Text(
-                    widget.title,
-                    style: TextStyle(
-                      fontSize: fontSizeProvider.fontSize,
-                      fontWeight: FontWeight.bold,
+          child: Consumer<FontSizeProvider>(
+            builder: (context, fontSizeProvider, child) {
+              return SelectableText.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: widget.title + '\n\n',
+                      style: TextStyle(
+                        fontSize: fontSizeProvider.fontSize,
+                        fontWeight: FontWeight.bold,
                         fontFamily: 'Poppins',
+                        color: Colors.black,
+                      ),
                     ),
-                  );
-                },
-              ),
-              const SizedBox(height: 15),
-              Consumer<FontSizeProvider>(
-                builder: (context, fontSizeProvider, child) {
-                  return SelectableText(
-                    widget.content,
-                    style: TextStyle(fontSize: fontSizeProvider.fontSize, fontFamily: 'Poppins',),
-                  );
-                },
-              ),
-            ],
+                    TextSpan(
+                      text: widget.content,
+                      style: TextStyle(
+                        fontSize: fontSizeProvider.fontSize,
+                        fontFamily: 'Poppins',
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
         ),
       ),
