@@ -60,7 +60,12 @@ class _ContentPageState extends State<ContentPage> {
         actions: [
           GestureDetector(
             onTap: () {
-              showBottomSheetSlider(context);
+              Clipboard.setData(
+                ClipboardData(text: '${widget.title}\n\n${widget.content}'),
+              );
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Copied to clipboard')),
+              );
             },
             child: Image.asset(
               'assets/images/copy.png',
@@ -71,12 +76,7 @@ class _ContentPageState extends State<ContentPage> {
           const SizedBox(width: 20),
           GestureDetector(
             onTap: () {
-              Clipboard.setData(
-                ClipboardData(text: '${widget.title}\n\n${widget.content}'),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Copied to clipboard')),
-              );
+              showBottomSheetSlider(context);
             },
             child: Image.asset(
               'assets/images/text.png',
