@@ -96,7 +96,7 @@ class _ContentPageState extends State<ContentPage> {
                 TextSpan(
                   children: [
                     TextSpan(
-                      text: widget.title + '\n\n',
+                      text: '${widget.title}\n\n',
                       style: TextStyle(
                         fontSize: fontSizeProvider.fontSize,
                         fontWeight: FontWeight.bold,
