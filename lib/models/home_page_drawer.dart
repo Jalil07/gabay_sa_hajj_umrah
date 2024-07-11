@@ -286,7 +286,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                   ListTile(
                     onTap: () {
                       String subject =
-                          'Quran Tagalog: Contact developer';
+                          'Gabay sa Hajj at Umrah: Contact developer';
                       String body = '';
                       _launchGmail(subject, body);
                     },
@@ -349,7 +349,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
 
   //open privacy policy
   final Uri _policy = Uri.parse(
-      'https://jsdapplications.blogspot.com/2022/03/quran-tagalog-privacy-policy.html');
+      'https://jsdapplications.blogspot.com/2024/02/gabay-sa-hajj-at-umrah-privacy-policy.html');
 
   Future<void> _launchPolicy() async {
     if (!await launchUrl(_policy, mode: LaunchMode.externalApplication)) {
