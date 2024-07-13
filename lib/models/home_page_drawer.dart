@@ -1,4 +1,5 @@
 import 'package:bot_toast/bot_toast.dart';
+import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../pages/attribution_page.dart';
@@ -358,10 +359,28 @@ class _HomeDrawerState extends State<HomeDrawer> {
   }
 
   //open messenger
+  // final Uri _messenger = Uri.parse('fb-messenger://user/100822268042440');
+  // Future<void> _launchMessenger() async {
+  //   if (!await launchUrl(_messenger, mode: LaunchMode.externalApplication)) {
+  //     BotToast.showText(text: 'Messenger not available');
+  //   }
+  // }
+
   final Uri _messenger = Uri.parse('fb-messenger://user/100822268042440');
+
   Future<void> _launchMessenger() async {
-    if (!await launchUrl(_messenger, mode: LaunchMode.externalApplication)) {
-      BotToast.showText(text: 'Messenger not available');
+    try {
+      bool isMessengerInstalled = await DeviceApps.isAppInstalled('com.facebook.orca');
+      if (isMessengerInstalled) {
+        bool launched = await launchUrl(_messenger, mode: LaunchMode.externalApplication);
+        if (!launched) {
+          BotToast.showText(text: 'Messenger not available');
+        }
+      } else {
+        BotToast.showText(text: 'Messenger not installed');
+      }
+    } catch (e) {
+      BotToast.showText(text: 'Failed to launch Messenger');
     }
   }
 

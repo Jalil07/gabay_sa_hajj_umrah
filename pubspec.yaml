@@ -39,6 +39,7 @@ dependencies:
   url_launcher: ^6.1.14
   bot_toast:
   flutter_native_splash: ^2.4.0
+  device_apps: ^2.2.0
 
 dev_dependencies:
   flutter_test:
