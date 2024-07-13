@@ -53,9 +53,9 @@ class _AttributionPageState extends State<AttributionPage> {
                         end: Alignment.bottomRight,
                         stops: [0, .6, 1],
                         colors: [
-                          Color(0xff70394B),
-                          Color(0xffa2667a),
-                          Color(0xff70394B),
+                          Color(0xFFE2D0B6),
+                          Color(0xFFFBEBD2),
+                          Color(0xFFE2D0B6),
                         ],
                       ),
                     ),
@@ -70,7 +70,7 @@ class _AttributionPageState extends State<AttributionPage> {
                         const Text(
                           'جمعية وقت الحوار\nللدعوة الإلكترونية',
                           style: TextStyle(
-                              color: Colors.white,
+                              color: Colors.black,
                               fontSize: 21,
                               fontFamily: 'Uthmanic'),
                         ),
@@ -86,9 +86,9 @@ class _AttributionPageState extends State<AttributionPage> {
                       end: Alignment.bottomRight,
                       stops: [0, .6, 1],
                       colors: [
-                        Color(0xff70394B),
-                        Color(0xffa2667a),
-                        Color(0xff70394B),
+                        Color(0xFFE2D0B6),
+                        Color(0xFFFBEBD2),
+                        Color(0xFFE2D0B6),
                       ],
                     ),
                   ),
@@ -102,7 +102,7 @@ class _AttributionPageState extends State<AttributionPage> {
                             height: 10,
                             decoration: const BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                           ),
                           const SizedBox(
@@ -111,7 +111,7 @@ class _AttributionPageState extends State<AttributionPage> {
                           const Text(
                             'Supports',
                             style: TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'Poppins'),
                           ),
@@ -122,7 +122,7 @@ class _AttributionPageState extends State<AttributionPage> {
                         child: Text(
                           'All the People who supports the app',
                           style: TextStyle(
-                              color: Colors.white, fontFamily: 'Poppins'),
+                              color: Colors.black, fontFamily: 'Poppins'),
                         ),
                       ),
                     ],

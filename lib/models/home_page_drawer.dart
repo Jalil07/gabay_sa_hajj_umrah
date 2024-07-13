@@ -135,14 +135,6 @@ class _HomeDrawerState extends State<HomeDrawer> {
                   const Divider(thickness: 0.7),
                   const SizedBox(height: 15),
                   const Text(
-                    'Settings',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Poppins'),
-                  ),
-                  const SizedBox(height: 15),
-                  const Text(
                     'General',
                     style: TextStyle(
                         fontSize: 15,
