@@ -66,13 +66,17 @@ class _AttributionPageState extends State<AttributionPage> {
                           'assets/images/dialoguetime.png',
                           height: 75,
                         ),
-                        const Spacer(),
-                        const Text(
-                          'جمعية وقت الحوار\nللدعوة الإلكترونية',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 21,
-                              fontFamily: 'Uthmanic'),
+                        const SizedBox(width: 20,),
+                        const Expanded(
+                          child: Text(
+                            'جَمْعِيَّة وَقْت اَلْحِوَار لِلدَّعْوَة اَلْإِلِكْتِرُونِيَّة',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontFamily: 'Kufi',
+                            ),
+                            textDirection: TextDirection.rtl,
+                          ),
                         ),
                       ],
                     )),

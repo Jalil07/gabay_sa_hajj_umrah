@@ -85,6 +85,10 @@ flutter:
       fonts:
         - asset: assets/fonts/Poppins.ttf
 
+    - family: Kufi
+      fonts:
+        - asset: assets/fonts/NotoKufiArabic-Regular.ttf
+
     - family: Uthmanic
       fonts:
         - asset: assets/fonts/Uthmanic.ttf
