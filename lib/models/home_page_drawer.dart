@@ -1,5 +1,4 @@
 import 'package:bot_toast/bot_toast.dart';
-import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../pages/attribution_page.dart';
@@ -14,88 +13,20 @@ class HomeDrawer extends StatefulWidget {
 
 class _HomeDrawerState extends State<HomeDrawer> {
 
-  void showDonateDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: const Color(0xFF007CFF),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              const SizedBox(height: 10),
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12)
-                ),
-                child: Column(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      // Adjust the curve radius here
-                      child: Image.asset('assets/images/qr_cropped.jpg'),
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(20.0),
-                          child: Image.asset(
-                            'assets/images/GCash.png', height: 40, width: 40,),
-                        ),
-                        const SizedBox(width: 25),
-                        const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SelectableText('JOENARDSON D.', style: TextStyle(
-                              fontSize: 14, color: Color(0xFF007CFF),),),
-                            SelectableText('09060092160', style: TextStyle(
-                              fontSize: 15, color: Color(0xFF007CFF),),),
-                          ],
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 20),
-              const SelectableText('For other methods, contact the developer.',
-                style: TextStyle(fontSize: 15, color: Colors.white),),
-              // Display the text
-              const SizedBox(height: 20),
-              // Add space before the close button
-              Row(
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop(); // Close the dialog
-                    },
-                    child: const Text('Close', style: TextStyle(fontSize: 15,
-                        color: Colors.white),), // Text of the close button
-                  ),
-                  const Spacer(),
-                  TextButton(
-                    onPressed: () {
-                      String subject = 'Sadaqah Inquiry via Gabay sa Hajj at Umrah';
-                      String body = '';
-                      _launchGmail(subject, body);
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text('Contact Developer', style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.white),), // Text of the close button
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
+  // Privacy policy link
+  final Uri _policy = Uri.parse(
+      'https://jsdapplications.blogspot.com/2024/02/gabay-sa-hajj-at-umrah-privacy-policy.html');
+
+  // Messenger ID
+  final Uri _messenger = Uri.parse('fb-messenger://user/100822268042440');
+
+  // Apple Store Link
+  final Uri _appleAppUrl = Uri.parse(
+      'https://apps.apple.com/us/developer/joenardson-divino/id1682679666');
+
+  // Play Store link
+  final Uri _androidAppUrl = Uri.parse(
+      'https://play.google.com/store/apps/dev?id=6989504765451629993&hl=en&gl=US');
 
   @override
   Widget build(BuildContext context) {
@@ -122,12 +53,17 @@ class _HomeDrawerState extends State<HomeDrawer> {
                         ),
                       ),
                       const SizedBox(height: 15),
-                      const Text(
-                        'Gabay sa Hajj at Umrah',
-                        style: TextStyle(
+                      Container(
+                        alignment: Alignment.center, // This ensures the text is centered
+                        child: const Text(
+                          'Gabay sa Hajj at Umrah',
+                          style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
-                            fontFamily: 'Poppins'),
+                            fontFamily: 'Poppins',
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ],
                   ),
@@ -184,7 +120,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                       showDonateDialog(context);
                     },
                     title: const Text(
-                      'Support',
+                      'Give Sadaqah',
                       style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.bold,
@@ -329,60 +265,133 @@ class _HomeDrawerState extends State<HomeDrawer> {
     );
   }
 
-  final Uri _appleAppUrl = Uri.parse(
-      'https://apps.apple.com/us/developer/joenardson-divino/id1682679666');
-  final Uri _androidAppUrl = Uri.parse(
-      'https://play.google.com/store/apps/dev?id=6989504765451629993&hl=en&gl=US');
-
+  // Open store
   Future<void> _launchURL(Uri url) async {
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
       throw 'Could not launch $url';
     }
   }
 
-  //open privacy policy
-  final Uri _policy = Uri.parse(
-      'https://jsdapplications.blogspot.com/2024/02/gabay-sa-hajj-at-umrah-privacy-policy.html');
-
+  // Open Policy
   Future<void> _launchPolicy() async {
     if (!await launchUrl(_policy, mode: LaunchMode.externalApplication)) {
       throw Exception('Could not launch Messenger');
     }
   }
 
-  //open messenger
-  // final Uri _messenger = Uri.parse('fb-messenger://user/100822268042440');
-  // Future<void> _launchMessenger() async {
-  //   if (!await launchUrl(_messenger, mode: LaunchMode.externalApplication)) {
-  //     BotToast.showText(text: 'Messenger not available');
-  //   }
-  // }
-
-  final Uri _messenger = Uri.parse('fb-messenger://user/100822268042440');
-
+  // Open Messenger
   Future<void> _launchMessenger() async {
     try {
-      bool isMessengerInstalled = await DeviceApps.isAppInstalled('com.facebook.orca');
-      if (isMessengerInstalled) {
-        bool launched = await launchUrl(_messenger, mode: LaunchMode.externalApplication);
-        if (!launched) {
-          BotToast.showText(text: 'Messenger not available');
-        }
-      } else {
-        BotToast.showText(text: 'Messenger not installed');
+      // Try to launch the Messenger URL
+      bool launched = await launchUrl(_messenger, mode: LaunchMode.externalApplication);
+      if (!launched) {
+        BotToast.showText(text: 'Messenger not available');
       }
     } catch (e) {
       BotToast.showText(text: 'Failed to launch Messenger');
     }
   }
 
-  //open gmail
+  // Open gmail
+
   Future<void> _launchGmail(String subject, String body) async {
-    final Uri gmail = Uri.parse(
-        'mailto:jsd.application@gmail.com?subject=$subject&body=$body');
-    if (!await launchUrl(gmail, mode: LaunchMode.externalApplication)) {
-      BotToast.showText(text: 'Mail not available');
+    try {
+      // Create the mailto URI with the provided subject and body
+      final Uri gmail = Uri.parse(
+          'mailto:jsd.application@gmail.com?subject=${Uri.encodeComponent(subject)}&body=${Uri.encodeComponent(body)}'
+      );
+
+      // Try to launch the URL
+      bool launched = await launchUrl(gmail, mode: LaunchMode.externalApplication);
+      if (!launched) {
+        BotToast.showText(text: 'Mail not available');
+      }
+    } catch (e) {
+      BotToast.showText(text: 'Failed to launch Gmail');
     }
+  }
+
+  void showDonateDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: const Color(0xFF007CFF),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              const SizedBox(height: 10),
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12)
+                ),
+                child: Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      // Adjust the curve radius here
+                      child: Image.asset('assets/images/qr_cropped.jpg'),
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: Image.asset(
+                            'assets/images/GCash.png', height: 40, width: 40,),
+                        ),
+                        const SizedBox(width: 25),
+                        const Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SelectableText('JOENARDSON D.', style: TextStyle(
+                              fontSize: 14, color: Color(0xFF007CFF),),),
+                            SelectableText('09060092160', style: TextStyle(
+                              fontSize: 15, color: Color(0xFF007CFF),),),
+                          ],
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+              const SelectableText('For other methods, contact the developer.',
+                style: TextStyle(fontSize: 15, color: Colors.white),),
+              // Display the text
+              const SizedBox(height: 20),
+              // Add space before the close button
+              Row(
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(); // Close the dialog
+                    },
+                    child: const Text('Close', style: TextStyle(fontSize: 15,
+                        color: Colors.white),), // Text of the close button
+                  ),
+                  const Spacer(),
+                  TextButton(
+                    onPressed: () {
+                      String subject = 'Sadaqah Inquiry via Gabay sa Hajj at Umrah';
+                      String body = '';
+                      _launchGmail(subject, body);
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('Contact Developer', style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.white),), // Text of the close button
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   SingleChildScrollView myInfo() =>
@@ -396,7 +405,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
             ),
             const SizedBox(height: 10),
             const Text(
-              'Da’iyah and Mobile App Developer.'),
+                'Da’iyah and Mobile App Developer.'),
             const SizedBox(height: 10),
             const Text(
                 'Has over 7 years of experience in online Da’wah and counting.'),
